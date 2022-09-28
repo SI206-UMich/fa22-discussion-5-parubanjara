@@ -22,7 +22,6 @@ class Item:
 	def __str__(self):
 		return ("Item = {}, Price = {}, Stock = {}".format(self.name, self.price, self.stock))
 
-
 # Warehouse class
 # A warehouse stores items and manages them accordingly.
 class Warehouse:
@@ -39,8 +38,8 @@ class Warehouse:
 
 	# Adds an item to the warehouse	
 	def add_item(self, item):
-		# self.items.append(item)
-		pass
+		self.items.append(item)
+		
 
 	# Returns the item in the warehouse with the most stock		
 	def get_max_stock(self):
@@ -63,6 +62,7 @@ class TestAllMethods(unittest.TestCase):
 		self.item3 = Item("Water", 1, 100)
 		self.item4 = Item("Fanta", 2, 60)
 		self.item5 = Item("CocaCola", 3, 40)
+		self.warehouse1 = Warehouse()
 
 	## Check to see whether count_a works
 	def test_count_a(self):
@@ -75,8 +75,11 @@ class TestAllMethods(unittest.TestCase):
 
 	## Check to see whether you can add an item to the warehouse
 	def test_add_item(self):
-		
-		pass
+		self.warehouse1.add_item(self.item1)
+		self.assertIn(self.item1, self.warehouse1.items)
+		self.warehouse1.add_item(self.item2)
+		self.assertIn(self.item1, self.warehouse1.items)
+		# pass
 
 
 	## Check to see whether warehouse correctly returns the item with the most stock

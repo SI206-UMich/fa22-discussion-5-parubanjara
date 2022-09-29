@@ -52,9 +52,13 @@ class Warehouse:
 				
 	
 	# Returns the item in the warehouse with the highest price
+
 	def get_max_price(self):
-	
-		pass	
+		max_price_item = None
+		for item in self.items:
+			if max_price_item is None or item.price > max_price_item.price:
+				max_price_item = item
+		return max_price_item
 
 
 # Tests
@@ -69,6 +73,7 @@ class TestAllMethods(unittest.TestCase):
 		self.item5 = Item("CocaCola", 3, 40)
 		self.add_item_warehouse = Warehouse()
 		self.max_stock_warehouse = Warehouse()
+		self.max_price_warehouse = Warehouse()
 
 	## Check to see whether count_a works
 	def test_count_a(self):
@@ -101,8 +106,14 @@ class TestAllMethods(unittest.TestCase):
 
 	# Check to see whether the warehouse correctly return the item with the highest price
 	def test_warehouse_max_price(self):
+		self.max_price_warehouse.add_item(self.item1)
+		self.max_price_warehouse.add_item(self.item2)
+		self.max_price_warehouse.add_item(self.item3)
+		self.max_price_warehouse.add_item(self.item4)
+		self.max_price_warehouse.add_item(self.item5)
 		
-		pass
+		item = self.max_price_warehouse.get_max_price()
+		self.assertIs(item, self.item1)
 		
 
 def main():
